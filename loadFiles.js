@@ -15,7 +15,7 @@ var loadData = async function() {
     STATE_LAWS = results[0];
     US_STATES = results[1];
     buildMap(US_STATES, STATE_LAWS);
-    setColor(STATE_LAWS, 55);
+    setColor(STATE_LAWS, 55, occupationsToConsider);
 }
 
 loadData()

@@ -14,11 +14,12 @@
     .on('onchange', val => {
       d3.select('p#value-time').text(d3.timeFormat('%Y')(val));
       console.log(d3.timeFormat('%Y')(val));
-      setColor(STATE_LAWS, +d3.timeFormat('%Y')(val) % 100)
+      currentTime = +d3.timeFormat('%Y')(val) % 100;
+      setColor(STATE_LAWS, currentTime, occupationsToConsider);
     });
 
   var gTime = d3
-    .select('div#slider')
+    .select("#slider")
     .append('svg')
     .attr('width', 1300)
     .attr('height', 100)
@@ -27,4 +28,4 @@
 
   gTime.call(sliderTime);
 
-  d3.select('p#value-time').text(d3.timeFormat('%Y')(sliderTime.value()));
+  d3.select("#value-time").text(d3.timeFormat('%Y')(sliderTime.value()));

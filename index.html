@@ -15,19 +15,42 @@
 }
 
 </style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<div class="OccupationList">
+  <a href="#" id = "1" class="list-group-item">State Employee</a>
+  <a href="#" id = "2" class="list-group-item">Local Police</a>
+  <a href="#" id = "3" class="list-group-item">Local Firefighters</a>
+  <a href="#" id = "4" class="list-group-item">Local Teachers</a>
+  <a href="#" id = "5" class="list-group-item">Other Employees</a>
+</div>
 <p id="value-time"></p>
-<ul id="occupations">
-    <li id="stateEmp">State Employee</li>
-    <li id="policeEmp">Local Police</li>
-    <li id="firefighterEmp">Local Firefighters</li>
-    <li id="teacherEmp">Local Teachers</li>
-    <li id="otherEmp">Other Local Employees</li>
-</ul>
 <div id="slider"></div>
+<svg id="legend" width="200" height="80"></svg>
 <svg id="map" width="960" height="600"></svg>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="https://d3js.org/topojson.v2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
 <script src="https://unpkg.com/d3-simple-slider"></script>
+<script> 
+var occupationsToConsider = [];
+var currentTime = 0;
+$(document).ready(
+    $('.OccupationList a').on('click', function (e) {
+        e.preventDefault()
+        $(this).toggleClass('active');
+        
+        var items = document.getElementsByClassName("list-group-item active");
+        occupationsToConsider = [];
+        for (let item of items) {
+            occupationsToConsider.push(parseInt(item.id, 10));
+        }
+        setColor(STATE_LAWS, currentTime, occupationsToConsider);
+    })
+);
+</script>
 <script src="buildMap.js"></script>
 <script src="loadFiles.js"></script>
 <script src="yearSlider.js"></script>
+<script src="legend.js"></script>

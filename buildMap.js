@@ -1,5 +1,4 @@
 var buildMap = function(us, stateLaws) {
-console.log(us)
 var svg = d3.select("#map");
 var path = d3.geoPath();
   svg.append("g")
@@ -16,13 +15,14 @@ var path = d3.geoPath();
 
 }
 
-var setColor = function(collection, year) {
-    COLOR_TRUE = "rgb(212,100,100)";
-    COLOR_FALSE = "rgb(100,212,212)";
+var COLOR_TRUE = "rgb(212,100,100)";
+var COLOR_FALSE = "rgb(100,212,212)";
+
+var setColor = function(collection, year, occupationsToConsider) {
     let filterFuncCol = [{"func": filterByRightToWork,
                           "args": {"year": year}},
                          {"func": filterByOccupation,
-                         "args": {"occupations": [4]}
+                         "args": {"occupations": occupationsToConsider}
                         }];
     setColorHelper(collection, year, COLOR_TRUE, COLOR_FALSE, filterFuncCol);
 }
@@ -35,7 +35,6 @@ var setColorHelper = function(collection, year, colorTrue, colorFalse, filterFun
     states.attr("fill", function(d) {
         color = colorFalse;
         filteredCollection = filter(collection, filterFuncCollection);
-        console.log(filteredCollection);
         for(let item of filteredCollection) {
             //Need to parseInt because the input string could be formatted like "05"
             if(parseInt(d.id, 10) == parseInt(item.id, 10)) {
