@@ -20,7 +20,10 @@ var setColor = function(collection, year) {
     COLOR_TRUE = "rgb(212,100,100)";
     COLOR_FALSE = "rgb(100,212,212)";
     let filterFuncCol = [{"func": filterByRightToWork,
-                          "args": {"year": year}}];
+                          "args": {"year": year}},
+                         {"func": filterByOccupation,
+                         "args": {"occupations": [4]}
+                        }];
     setColorHelper(collection, year, COLOR_TRUE, COLOR_FALSE, filterFuncCol);
 }
 
@@ -45,10 +48,10 @@ var setColorHelper = function(collection, year, colorTrue, colorFalse, filterFun
 
 
 var filter = function(collection, filterFuncCollection) {
-    finalCollection = [];
+    finalCollection = collection;
     filterFuncCollection.forEach((filter) => {
         let newCollection = []
-        collection.forEach((item) => {
+        finalCollection.forEach((item) => {
             if(filter.func(item, filter.args)) {
                 newCollection.push(item);     
             }
@@ -66,4 +69,8 @@ var filterByRightToWork = function(item, args) {
         }
     }
     return false;
-}
+};
+
+var filterByOccupation = function(item, args) {
+    return args.occupations.indexOf(parseInt(item.occup, 10)) > -1;
+};
