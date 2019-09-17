@@ -1,5 +1,5 @@
 # PublicUnionDataViz
-
+https://ben-ackerman.github.io/PublicUnionDataViz/
 Source code for a data vizualization of public sector union laws changes across the US over time.
 
 ## Purpose of this project
